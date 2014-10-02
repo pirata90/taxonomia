@@ -17,14 +17,8 @@
 
 module.exports = {
     
-  
-
-
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to DiagramaController)
-   */
-  _config: {}
-
+    mostrar: function(req, res, next) {
+        res.view();
+  }  
   
 };
