@@ -19,6 +19,15 @@ module.exports = {
     
     mostrar: function(req, res, next) {
         res.view();
-  }  
+  },
+    tree: function(req, res, next) {
+        res.view();
+  },
+    flat: function(req, res, next) {
+        res.view();
+  },
+    tree2: function(req, res, next) {
+        res.view();
+  }       
   
 };
