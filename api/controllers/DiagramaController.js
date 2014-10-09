@@ -28,6 +28,16 @@ module.exports = {
   },
     tree2: function(req, res, next) {
         res.view();
-  }       
+  },
+    gravity: function(req, res, next) {
+        res.view();
+  },
+   labels: function(req, res, next) {
+        res.view();
+  },
+  path: function(req, res, next) {
+        res.view();
+  }   
+
   
 };

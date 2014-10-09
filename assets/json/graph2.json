@@ -1,0 +1,114 @@
+{
+  "directed": true,
+  "graph": [],
+  "nodes": [
+    {
+      "color": "#00FF00",
+      "size": 10,
+      "id": "Reino: Plantae"
+    },
+    {
+      "color": "#CA3821",
+       "size": 4,
+      "id": "1"
+    },
+    {
+      "color": "#da991c",
+      "size": 2,
+      "id": "2"
+    },
+    {
+      "color": "#da991c",
+      "id": "3"
+    },
+    {
+      "color": "#CA3821",
+       "size": 4,
+      "id": "División: Magnoliophyta"
+    },
+    {
+      "color": "#da991c",
+      "id": "5"
+    },
+    {
+      "color": "#da991c",
+       "size": 2,
+      "id": "Clase: Magnoliopsida"
+    },
+    {
+      "color": "#4D4DFF",
+      "id": "Orden: Caryophyllales"
+    },
+     {
+      "color": "#4D4DFF",
+      "id": "8"
+    },
+     {
+      "color": "#da991c",
+      "id": "Familia: Droseraceae"
+    },
+     {
+      "color": "#da991c",
+      "id": "10"
+    },
+    {
+      "color": "#da991c",
+      "id": "11"
+    },
+    {
+      "color": "#da991c",
+      "id": "12"
+    }
+  ],
+  "links": [
+    {
+      "source": 0,
+      "target": 1
+    },
+     {
+      "source": 1,
+      "target": 2
+    },
+     {
+      "source": 1,
+      "target": 3
+    },
+     {
+      "source": 0,
+      "target": 4
+    },
+     {
+      "source": 4,
+      "target": 5
+    },
+     {
+      "source": 4,
+      "target": 6
+    },
+    {
+      "source": 6,
+      "target": 7
+    },
+    {
+      "source": 2,
+      "target": 8
+    },
+      {
+      "source": 7,
+      "target": 9
+    },
+    {
+      "source": 8,
+      "target": 10
+    },
+    {
+      "source": 7,
+      "target": 11
+    },
+    {
+      "source": 8,
+      "target": 12
+    }
+  ],
+  "multigraph": false
+}
