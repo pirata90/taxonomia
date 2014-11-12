@@ -74,7 +74,7 @@ function redraw() {
 console.log("here", d3.event.translate, d3.event.scale);
 svg.attr("transform","translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")"); } 
 
-d3.json("/json/flare.json", function(error, flare) {
+d3.json("/json/Prueba3.json", function(error, flare) {
   root = flare;
   root.x0 = height / 2;
   root.y0 = 0;
