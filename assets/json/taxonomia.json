@@ -1,0 +1,135 @@
+{
+    "name": "root",
+    "children": [
+        {
+            "name": "Plantae",
+            "children": [
+                {
+                    "name": "Pteridophyta",
+                    "children": [
+                        {
+                            "name": "Pteridopsida",
+                            "children": [
+                                {
+                                    "name": "Filicales",
+                                    "children": [
+                                        {
+                                            "name": "Pteridaceae",
+                                            "children": [
+                                                {
+                                                    "name": "Plantas",
+                                                    "children": [
+                                                        {
+                                                            "name": "Adiantum tenerum"
+                                                        },
+                                                        {
+                                                            "name": "Adiantum terminatum"
+                                                        },
+                                                        {
+                                                            "name": "Adiantum tetraphyllum"
+                                                        },
+                                                        {
+                                                            "name": "Adiantum trapeziforme"
+                                                        },
+                                                        {
+                                                            "name": "Adiantum trichochlaenum"
+                                                        },
+                                                        {
+                                                            "name": "Adiantum urophyllum"
+                                                        },
+                                                        {
+                                                            "name": "Adiantum villosissimum"
+                                                        },
+                                                        {
+                                                            "name": "Adiantum villosum"
+                                                        },
+                                                        {
+                                                            "name": "Adiantum wilsonii"
+                                                        },
+                                                        {
+                                                            "name": "Adiantum × variopinnatum"
+                                                        },
+                                                        {
+                                                            "name": "Argyrochosma incana"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Adiantaceae",
+                                            "children": [
+                                                {
+                                                    "name": "Plantas",
+                                                    "children": [
+                                                        {
+                                                            "name": "Aleuritopteris farinosa"
+                                                        },
+                                                        {
+                                                            "name": "Anogramma leptophylla"
+                                                        },
+                                                        {
+                                                            "name": "Astrolepis sinuata"
+                                                        },
+                                                        {
+                                                            "name": "Bommeria pedata"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Polipodiales",
+                                    "children": [
+                                        {
+                                            "name": "Pteridaceae",
+                                            "children": [
+                                                {
+                                                    "name": "Plantas",
+                                                    "children": [
+                                                        {
+                                                            "name": "Cheilanthes angustifolia"
+                                                        },
+                                                        {
+                                                            "name": "Cheilanthes bonariensis"
+                                                        },
+                                                        {
+                                                            "name": "Cheilanthes brachypus"
+                                                        },
+                                                        {
+                                                            "name": "Cheilanthes complanata"
+                                                        },
+                                                        {
+                                                            "name": "Cheilanthes cuneata"
+                                                        },
+                                                        {
+                                                            "name": "Cheilanthes harrisii"
+                                                        },
+                                                        {
+                                                            "name": "Cheilanthes hirsuta"
+                                                        },
+                                                        {
+                                                            "name": "Cheilanthes kaulfussii"
+                                                        },
+                                                        {
+                                                            "name": "Cheilanthes lendigera"
+                                                        },
+                                                        {
+                                                            "name": "Cheilanthes lersteni"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
