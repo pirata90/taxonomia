@@ -1,40 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-      <style>
-       .graph {
-        margin:0 auto;
-        width:1250px;
-        color:#FFF;
-        border: 1px dashed #333;
-        fill: #000;
-        }     
 
-      .node {
-        cursor: pointer;
-      }
+  <style>
+  body{
+       background-image: url('/images/swirl_pattern.png');
+       background-repeat:repeat;
+     }
+    .selected {
+    fill: red;
+  }
 
-      .node circle {
-        fill: #fff;
-        stroke: steelblue;
-        stroke-width: 1.5px;
-      }
+  .node {
+    cursor: pointer;
+  }
 
-      .node text {
-        font: 10px sans-serif;
-      }
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
 
-      .link {
-        fill: none;
-        stroke: #ccc;
-        stroke-width: 1.5px;
-      }
+  .node text {
+    font: 10px sans-serif;
+  }
 
-      </style>
- <script src="/js/d3-min.js"></script>
-</head>
-<body>
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+  #ui-id-1 li{
+    margin-top: 9px;
+  }
+  </style>
+
+<link rel="stylesheet" href="/styles/search.css">
+<script src="/js/d3-min.js"></script>
+<script src="/js/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript" src="/js/defiant.js"></script>
+
+ <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Home</a>
+        </div>
+       <div class="search">
+        <input type="text" class="form-control input" id="search2" onKeyPress="enterpressalert(event, this)" maxlength="64" placeholder="Search" />
+         <button type="submit" class="btn btn-primary btn" onclick="searchNode()">Search</button>
+        </div>
+      </div>
+    </nav>
+
+<div class="container">
+
+<!-- Output element -->
+ <div class="row">
+  <div class="col-md-12"><!-- Modal -->
+            <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="text-danger fa fa-times"></i></button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="text-muted fa fa-shopping-cart"></i> <strong>Especie</strong> - Cheilanthes complanata</h4>
+                  </div>
+                  <div class="modal-body">
+                  
+                    <table class="pull-left col-md-8 ">
+                         <tbody>
+                             <tr>
+                                 <td class="h6"><strong>Código</strong></td>
+                                 <td> </td>
+                                 <td class="h5">02051</td>
+                             </tr>
+                             
+                             <tr>
+                                 <td class="h6"><strong>Descripcion</strong></td>
+                                 <td> </td>
+                                 <td class="h5">Donec sed nibh dui.</td>
+                             </tr>
+                             
+                             <tr>
+                                 <td class="h6"><strong>Habitad</strong></td>
+                                 <td> </td>
+                                 <td class="h5">Nullam id nibh id nibh</td>
+                             </tr>
+                             
+                             <tr>
+                                 <td class="h6"><strong>Altura</strong></td>
+                                 <td> </td>
+                                 <td class="h5">1000</td>
+                             </tr>
+                         </tbody>
+                    </table>
+                             
+                         
+                    <div class="col-md-4"> 
+                        <img src="/images/rsz_plantas-ornamentales1.png" alt="teste" class="img-thumbnail">  
+                    </div>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                    
+                  <div class="modal-footer">                            
+                </div>
+              </div>
+            </div>
+            </div></div>
+</div>
+
+<script type="text/javascript">
+function enterpressalert(e, textarea){
+var code = (e.keyCode ? e.keyCode : e.which);
+if(code == 13) { //Enter keycode
+  searchNode();
+}
+}
+</script>
+<script>
+   /**
+  $(function() {
+ 
+    var data = [
+    {"label" : "Aragorn"},
+    {"label" : "Arwen"},
+    {"label" : "Bilbo Baggins"},
+    {"label" : "Boromir"},
+    {"label" : "Frodo Baggins"},
+    {"label" : "Gandalf"},
+    {"label" : "Gimli"},
+    {"label" : "Gollum"},
+    {"label" : "Legolas"},
+    {"label" : "Meriadoc Merry Brandybuck"},
+    {"label" : "Peregrin Pippin Took"},
+    {"label" : "Samwise Gamgee"}
+    ];
+
+var request = new XMLHttpRequest();
+var graph;
+request.open("GET", "../../json/Especie.json", false);
+request.send(null);
+request.onreadystatechange = function() {
+  if ( request.readyState === 4 && request.status === 200 ) {
+    graph = JSON.parse(request.responseText);
+  }
+}
+
+var data2;
+$.getJSON("/json/Especie.json", function(data) {
+    console.log(data);
+    //data2 = JSON.parse(data); 
+    //data2 = JSON.(data); 
+     $( "#search" ).autocomplete({
+      source: data
+    });
+  });
+});
+
+   */
+ </script>
 
 <script>
 
@@ -71,8 +194,43 @@ var svg = d3.select("body")
     .attr('fill', 'rgba(1,1,1,0)')
 
 function redraw() {
-console.log("here", d3.event.translate, d3.event.scale);
+//console.log("here", d3.event.translate, d3.event.scale);
 svg.attr("transform","translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")"); } 
+
+//var mis = '/json/Especie.json';
+//var config = require('assets/json/Especie.json');
+
+/*
+var request = new XMLHttpRequest();
+var graph;
+request.open("GET", "../../json/Especie.json", false);
+request.send(null);
+request.onreadystatechange = function() {
+  if ( request.readyState === 4 && request.status === 200 ) {
+    graph = JSON.parse(request.responseText);
+  }
+}
+*/
+var data2 = [
+    {"label" : "Aragorn"},
+    {"label" : "Arwen"},
+    {"label" : "Bilbo Baggins"},
+    {"label" : "Boromir"},
+    {"label" : "Frodo Baggins"},
+    {"label" : "Gandalf"},
+    {"label" : "Gimli"},
+    {"label" : "Gollum"},
+    {"label" : "Legolas"},
+    {"label" : "Meriadoc Merry Brandybuck"},
+    {"label" : "Peregrin Pippin Took"},
+    {"label" : "Samwise Gamgee"}
+    ];
+
+
+//graph = JSON.parse(config);
+
+//var mis = document.getElementById('mis').innerHTML;
+ //graph = JSON.parse(mis);
 
 d3.json("/json/Prueba3.json", function(error, flare) {
   root = flare;
@@ -111,10 +269,14 @@ function update(source) {
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
       .on("click", click);
-
+//6964FF
   nodeEnter.append("circle")
       .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; })
+      .style("stroke", function(d) { return d._children ? "#60B4F5" : "#60B4F5"; })
+      .on("mouseover", function(){d3.select(this).style("stroke", "red");})
+      .on("mouseout", function(d) {
+       d3.select(this).style("stroke","#60B4F5");} );
 
   nodeEnter.append("text")
       .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
@@ -154,6 +316,10 @@ function update(source) {
   // Enter any new links at the parent's previous position.
   link.enter().insert("path", "g")
       .attr("class", "link")
+      .style("stroke", function(d) { return d._children ? "#A48B8B" : "#A48B8B"; })
+      .on("mouseover", function(){d3.select(this).style("stroke", "red");})
+      .on("mouseout", function(d) {
+       d3.select(this).style("stroke","#A48B8B");} )
       .attr("d", function(d) {
         var o = {x: source.x0, y: source.y0};
         return diagonal({source: o, target: o});
@@ -182,6 +348,13 @@ function update(source) {
 
 // Toggle children on click.
 function click(d) {
+  d3.select(".selected").classed("selected", false);
+  d3.select(this).classed("selected", true);
+  if(d.name == "Hymenophyllum apiculatum" || d.name == "Dicranopteris flexuosa" || d.name == "Dicranopteris flexuosa" || d.name == "Dicranopteris pectinata" || d.name == "Diplopterigium bancroftii"){
+    $('#myModal').modal('show');
+  }
+  //console.log(d3.select(this));
+  console.log(d.name);
   if (d.children) {
     d._children = d.children;
     d.children = null;
@@ -192,6 +365,31 @@ function click(d) {
   update(d);
 }
 
+function searchNode() {
+
+    //find the node
+
+    var selectedVal = document.getElementById('search2').value;
+    var node = svg.selectAll(".node");
+
+    if (selectedVal == "none") {
+        node.style("stroke", "white").style("stroke-width", "1");
+    } else {
+        var selected = node.filter(function (d, i) {
+            return d.name != selectedVal;
+        });
+        selected.style("opacity", "0");
+        var link = svg.selectAll(".link")
+        link.style("opacity", "0");
+        d3.selectAll(".node, .link").transition()
+            .duration(5000)
+            .style("opacity", 1);     
+    }
+}
+
 </script>
-</body>
-</html>
+</div>
+
+
+
+
