@@ -27,6 +27,9 @@ module.exports = {
   tree3: function(req, res, next) {
         res.view();
   },
+  tree4: function(req, res, next) {
+        res.view();
+  },
   relaciones: function(req, res, next) {
     // Declare variables
     var fs = require('fs');

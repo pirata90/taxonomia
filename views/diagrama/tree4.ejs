@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+.found {
+  fill: #ff4136;
+  stroke: #ff4136;
+}
+
+ .selected {
+    fill: red;
+  }
+
+.search {
+  float: left;
+  font: 10px sans-serif;
+  width: 20%;
+}
+
+ul.select2-results {
+ max-height: 100px;
+}
+
+.select2-container,
+.select2-drop,
+.select2-search,
+.select2-search input {
+  font: 10px sans-serif;
+  width: 200px;
+}
+
+#block_container {
+  position:fixed;
+  margin-top: 10px;
+  margin-left: 130px;
+}
+
+.panel-custom {
+  border-color: #373737;
+   font-family: 'Open Sans', sans-serif;
+}
+.panel-custom > .panel-heading {  
+  background-color: #252525;
+  border-top: 1px solid #373737;
+  border-bottom: 1px solid #1A1A1A;
+}
+.panel-custom > .panel-body{
+
+}
+.panel-custom > .panel-heading + .panel-collapse .panel-body {
+  text-decoration: none;
+ 
+  color: #FFFFFF;
+  border-top-color: #373737;
+  background-color: #252525;
+}
+.panel-custom > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #373737;
+}
+.titulo{
+  color: rgb(158, 202, 59);
+}
+
+</style>
+<body>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/styles/search.css">
+<link rel="stylesheet" href="/styles/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.css"></link>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.js"></script>
+
+<script type="text/javascript" src="/js/defiant.js"></script>
+
+<!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Taxonomia</a>
+        </div>
+         <div id="block_container">
+           <div id="searchName"></div>
+         </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="">Acerca de</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+        <nav class="navbar navbar-fixed-left navbar-minimal">
+        <div class="navbar-toggler animate" id="menu-toggle">
+              <span class="menu-icon"></span>
+          </div>
+        </nav>
+      </div>
+    </nav>
+    
+   
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a>
+                        Informacion
+                    </a>
+                </li>
+                <li>
+ <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-custom">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Variables básicas
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <dl>
+           <dt class="titulo">Nombre cientifico</dt>
+           <dd id="idTaxon" class="idTaxon"></dd>
+           <dt class="titulo">Nombre comun</dt>
+           <dd id="idTEMP_NombreComun" class="idTEMP_NombreComun"></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-custom">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Variables completas
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+         <dt class="titulo">Nombre cientifico</dt>
+         <dd id="idTaxon" class="idTaxon"></dd>
+         <dt class="titulo">Nombre comun</dt>
+         <dd id="idTEMP_NombreComun" class="idTEMP_NombreComun"></dd>
+         <dt class="titulo">Testigo</dt>
+         <dd id="idTestigo"></dd>
+         <dt class="titulo">Etimologia</dt>
+         <dd id="idEtimologia"></dd>
+         <dt class="titulo">Descripción diagnóstica</dt>
+         <dd id="idDescripcion_Diagnostica"></dd>
+         <dt class="titulo">Distribución nacional</dt>
+         <dd id="idDistr_Nacional"></dd>
+         <dt class="titulo">Distribución Mundial</dt>
+         <dd id="idDistr_Mundial"></dd>
+         <dt class="titulo">Origen</dt>
+         <dd id="idOrigen"></dd>
+         <dt class="titulo">Época de floración</dt>
+         <dd id="idEpoca_Fls"></dd>
+         <dt class="titulo">Época de fructificación</dt>
+         <dd id="idEpoca_Frs"></dd>
+         <dt class="titulo">Usos</dt>
+         <dd id="idUsos"></dd>
+      </div>
+    </div>
+  </div>
+</div>
+                </li>
+            </ul>
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+<script>
+
+//===============================================
+function select2DataCollectName(d) {
+    if (d.children)
+        d.children.forEach(select2DataCollectName);
+    else if (d._children)
+        d._children.forEach(select2DataCollectName);
+    select2Data.push(d.name);
+}
+
+//===============================================
+function searchTree(d) {
+    if (d.children)
+        d.children.forEach(searchTree);
+    else if (d._children)
+        d._children.forEach(searchTree);
+    var searchFieldValue = eval(searchField);
+    if (searchFieldValue && searchFieldValue.match(searchText)) {
+            // Walk parent chain
+            var ancestors = [];
+            var parent = d;
+            while (typeof(parent) !== "undefined") {
+                ancestors.push(parent);
+    //console.log(parent);
+                parent.class = "found";
+                parent = parent.parent;
+            }
+      //console.log(ancestors);
+    }
+}
+
+//===============================================
+function clearAll(d) {
+    d.class = "";
+    if (d.children)
+        d.children.forEach(clearAll);
+    else if (d._children)
+        d._children.forEach(clearAll);
+}
+
+//===============================================
+function collapse(d) {
+    if (d.children) {
+        d._children = d.children;
+        d._children.forEach(collapse);
+        d.children = null;
+    }
+}
+
+//===============================================
+function collapseAllNotFound(d) {
+    if (d.children) {
+      if (d.class !== "found") {
+          d._children = d.children;
+          d._children.forEach(collapseAllNotFound);
+          d.children = null;
+  } else 
+          d.children.forEach(collapseAllNotFound);
+    }
+}
+
+//===============================================
+function expandAll(d) {
+    if (d._children) {
+        d.children = d._children;
+        d.children.forEach(expandAll);
+        d._children = null;
+    } else if (d.children)
+        d.children.forEach(expandAll);
+}
+
+//===============================================
+ var infoSideBar;
+  $.getJSON("/json/sideBar.json", function(data) {
+    //console.log(data);
+    //data2 = JSON.parse(data); 
+    //data2 = JSON.(data); 
+    infoSideBar = data;
+  });
+// Toggle children on click.
+function toggle(d) {
+  d3.select(".selected").classed("selected", false);
+  d3.select(this).classed("selected", true);
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+  clearAll(root);
+  update(d);
+  $("#searchName").select2("val", ""); 
+  // Search Species by name 
+  // Filter by species
+  if(d.depth == 7){
+        var reds = JSON.search(infoSideBar, '//*[Taxon="'+d.name+'"]');
+        for (var i=0; i<reds.length; i++) {
+            var currentid = $('.idTaxon').text(reds[i].Taxon);
+             $('#idTestigo').text(reds[i].Testigo);
+             $('.idTEMP_NombreComun').text(reds[i].TEMP_NombreComun);
+             $('#idEtimologia').text(reds[i].Etimologia);
+             $('#idDescripcion_Diagnostica').text(reds[i].Descripcion_Diagnostica);
+             $('#idDistr_Nacional').text(reds[i].Distr_Nacional);
+             $('#idDistr_Mundial').text(reds[i].Distr_Mundial);
+             $('#idOrigen').text(reds[i].Origen);
+             $('#idEpoca_Fls').text(reds[i].Epoca_Fls);
+             $('#idEpoca_Frs').text(reds[i].Epoca_Frs);
+             $('#idUsos').text(reds[i].Usos);
+        }
+      }
+}
+
+//===============================================
+$("#searchName").on("select2-selecting", function(e) {
+    clearAll(root);
+    expandAll(root);
+    update(root);
+
+    searchField = "d.name";
+    searchText = e.object.text;
+    searchTree(root);
+    root.children.forEach(collapseAllNotFound);
+    update(root);
+})
+
+//===============================================
+var realWidth = window.innerWidth;
+var realHeight = window.innerHeight;
+
+var margin = {top: 20, right: 120, bottom: 20, left: 120},
+    width = realWidth - margin.right - margin.left,
+    height = realHeight - margin.top - margin.bottom;
+    
+var i = 0,
+    duration = 750,
+    root;
+
+var tree = d3.layout.tree()
+    .size([height, width]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .call(d3.behavior.zoom().on("zoom", redraw))
+    .append('g')
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+     svg.append('svg:rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('fill', 'rgba(1,1,1,0)')
+
+    function redraw() {
+//console.log("here", d3.event.translate, d3.event.scale);
+svg.attr("transform","translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")"); } 
+
+d3.json("/json/Prueba4.json", function(error, flare) {
+  root = flare;
+  root.x0 = height / 2;
+  root.y0 = 0;
+
+  select2Data = [];
+  select2DataCollectName(root);
+  select2DataObject = [];
+  select2Data.sort(function(a, b) {
+            if (a > b) return 1; // sort
+            if (a < b) return -1;
+            return 0;
+        })
+        .filter(function(item, i, ar) {
+            return ar.indexOf(item) === i;
+        }) // remove duplicate items
+        .filter(function(item, i, ar) {
+            select2DataObject.push({
+                "id": i,
+                "text": item
+            });
+        });
+    select2Data.sort(function(a, b) {
+            if (a > b) return 1; // sort
+            if (a < b) return -1;
+            return 0;
+        })
+        .filter(function(item, i, ar) {
+            return ar.indexOf(item) === i;
+        }) // remove duplicate items
+        .filter(function(item, i, ar) {
+            select2DataObject.push({
+                "id": i,
+                "text": item
+            });
+        });
+  $("#searchName").select2({
+        data: select2DataObject,
+        containerCssClass: "search"
+  });
+
+  function collapse(d) {
+    if (d.children) {
+      d._children = d.children;
+      d._children.forEach(collapse);
+      d.children = null;
+    }
+  }
+
+  root.children.forEach(collapse);
+  update(root);
+});
+
+d3.select(self.frameElement).style("height", "800px");
+
+function update(source) {
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse(),
+      links = tree.links(nodes);
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+  // Update the nodes…
+  var node = svg.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", toggle);
+
+  nodeEnter.append("circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeEnter.append("text")
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1e-6);
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+      .attr("r", 4.5)
+      .style("fill", function(d) {
+            if (d.class === "found") {
+                return "#ff4136"; //red
+            } else if (d._children) {
+                return "lightsteelblue";
+            } else {
+                return "#fff";
+            }
+        })
+        .style("stroke", function(d) {
+            if (d.class === "found") {
+                return "#ff4136"; //red
+            }
+        });
+
+  nodeUpdate.select("text")
+      .style("fill-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = svg.selectAll("path.link")
+      .data(links, function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      });
+
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal)
+      .style("stroke", function(d) {
+            if (d.target.class === "found") {
+                return "#ff4136";
+            }
+        });
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+
+</script>
+
+<!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    $('.navbar-toggler').on('click', function(event) {
+        event.preventDefault();
+        $(this).closest('.navbar-minimal').toggleClass('open');
+    })
+    </script>
+
+</body>
