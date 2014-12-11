@@ -136,7 +136,7 @@ ul.select2-results {
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Variables básicas
+          Informacion básica
         </a>
       </h4>
     </div>
@@ -155,7 +155,7 @@ ul.select2-results {
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Variables completas
+          Informacion completa
         </a>
       </h4>
     </div>
@@ -196,6 +196,7 @@ ul.select2-results {
 <script>
 
 //===============================================
+//Recorre el arbol y crear un array para el select
 function select2DataCollectName(d) {
     if (d.children)
         d.children.forEach(select2DataCollectName);
@@ -205,6 +206,7 @@ function select2DataCollectName(d) {
 }
 
 //===============================================
+//Busca la especie y recorre el arbol para encontrar las relaciones desde la raiz hasta la especie
 function searchTree(d) {
     if (d.children)
         d.children.forEach(searchTree);
@@ -293,16 +295,37 @@ function toggle(d) {
         var reds = JSON.search(infoSideBar, '//*[Taxon="'+d.name+'"]');
         for (var i=0; i<reds.length; i++) {
             var currentid = $('.idTaxon').text(reds[i].Taxon);
-             $('#idTestigo').text(reds[i].Testigo);
+            if (reds[i].TEMP_NombreComun != null) {
              $('.idTEMP_NombreComun').text(reds[i].TEMP_NombreComun);
+            };
+            if (reds[i].Testigo != null) {
+             $('#idTestigo').text(reds[i].Testigo);
+            };
+            if (reds[i].Etimologia != null) {
              $('#idEtimologia').text(reds[i].Etimologia);
-             $('#idDescripcion_Diagnostica').text(reds[i].Descripcion_Diagnostica);
+            };
+            if (reds[i].Descripcion_Diagnostica != null) {
+              $('#idDescripcion_Diagnostica').text(reds[i].Descripcion_Diagnostica);
+            };
+            if (reds[i].Distr_Nacional != null) {
              $('#idDistr_Nacional').text(reds[i].Distr_Nacional);
-             $('#idDistr_Mundial').text(reds[i].Distr_Mundial);
-             $('#idOrigen').text(reds[i].Origen);
-             $('#idEpoca_Fls').text(reds[i].Epoca_Fls);
-             $('#idEpoca_Frs').text(reds[i].Epoca_Frs);
-             $('#idUsos').text(reds[i].Usos);
+            };
+             if (reds[i].Distr_Mundial != null) {
+              $('#idDistr_Mundial').text(reds[i].Distr_Mundial);
+            };
+             if (reds[i].Origen != null) {
+              $('#idOrigen').text(reds[i].Origen);
+            };
+             if (reds[i].Epoca_Fls != null) {
+              $('#idEpoca_Fls').text(reds[i].Epoca_Fls);
+            };
+             if (reds[i].Epoca_Frs != null) {
+              $('#idEpoca_Frs').text(reds[i].Epoca_Frs);
+            };
+             if (reds[i].Usos != null) {
+              $('#idUsos').text(reds[i].Usos);
+            };
+             
         }
       }
 }
