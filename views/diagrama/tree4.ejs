@@ -24,7 +24,7 @@
 
 .found {
   fill: #ff4136;
-  stroke: #ff4136;
+  stroke: #36B3FF;
 }
 
  .selected {
@@ -289,6 +289,12 @@ function toggle(d) {
   clearAll(root);
   update(d);
   $("#searchName").select2("val", ""); 
+  //Cambia de color al seleccionar elementos 
+   searchField = "d.name";
+   searchText = d.name;
+   searchTree(root);
+   //root.children.forEach(collapseAllNotFound);
+   update(root);
   // Search Species by name 
   // Filter by species
   if(d.depth == 7){
@@ -373,6 +379,7 @@ var svg = d3.select("body").append("svg")
     .attr('width', width)
     .attr('height', height)
     .attr('fill', 'rgba(1,1,1,0)')
+    .transition().duration(500)
 
     function redraw() {
 //console.log("here", d3.event.translate, d3.event.scale);
@@ -454,7 +461,7 @@ function update(source) {
 
   nodeEnter.append("circle")
       .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+      .style("fill", function(d) { return d._children ? "#ff4136" : "#fff"; });
 
   nodeEnter.append("text")
       .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
@@ -473,8 +480,22 @@ function update(source) {
       .style("fill", function(d) {
             if (d.class === "found") {
                 return "#ff4136"; //red
-            } else if (d._children) {
-                return "lightsteelblue";
+            }else if (d._children && d.depth == 0) {
+                return "#A4811F";
+            }else if (d._children && d.depth == 1) {
+                return "#EC1818";
+            }else if (d._children && d.depth == 2) {
+                return "#54EC18";
+            }else if (d._children && d.depth == 3) {
+                return "#18CCEC";
+            }else if (d._children && d.depth == 4) {
+                return "#F75C02";
+            }else if (d._children && d.depth == 5) {
+                return "#B418EC";
+            }else if (d._children && d.depth == 6) {
+                return "#ECEC18";
+            }else if (d.depth == 7) {
+                return "#1858EC";
             } else {
                 return "#fff";
             }
@@ -482,11 +503,25 @@ function update(source) {
         .style("stroke", function(d) {
             if (d.class === "found") {
                 return "#ff4136"; //red
+            }else if (d.depth == 7) {
+                return "#02F758";
+            }else {
+                return "#7C7171";//029DF7
             }
         });
 
   nodeUpdate.select("text")
-      .style("fill-opacity", 1);
+      .style("fill-opacity", 1)
+      .style("font-weight", function(d) {
+            if (d.class === "found") {
+                return 600;
+            }
+        })
+      .style("font-size", function(d) {
+            if (d.class === "found") {
+                return "13px";
+            }
+        });
 
   // Transition exiting nodes to the parent's new position.
   var nodeExit = node.exit().transition()
@@ -519,6 +554,13 @@ function update(source) {
       .style("stroke", function(d) {
             if (d.target.class === "found") {
                 return "#ff4136";
+            }else {
+                return "#A48B8B";
+            }
+        })
+      .style("stroke-width", function(d) {
+            if (d.target.class === "found") {
+                return "2.2";
             }
         });
 
